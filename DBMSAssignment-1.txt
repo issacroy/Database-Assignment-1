@@ -1,0 +1,790 @@
+| mydb               |
+| mydb1              |
+| mypack             |
+| mysql              |
+| newdata            |
+| nn                 |
+| practical          |
+| pushkaraj_exam     |
+| rahul              |
+| rdb                |
+| sdb                |
+| shruti             |
+| sona               |
+| star               |
+| student_portal     |
+| swapdata           |
+| test               |
+| travaller          |
+| val                |
+| vehicleconfig      |
++--------------------+
+31 rows in set (0.00 sec)
+
+mysql> DESC mart;
+ERROR 1046 (3D000): No database selected
+mysql> SELECT mart;
+ERROR 1054 (42S22): Unknown column 'mart' in 'field list'
+mysql> CREATE DATABASE Adventureworks;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> USE Adventureworks;
+Database changed
+mysql> CREATE TABLE product category(CID int,NAME varchar(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'category(CID int,NAME varchar(20))' at line 1
+mysql> create table product(cid number,brand varchar(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'number,brand varchar(20))' at line 1
+mysql> create table product(cid number(10),brand varchar(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'number(10),brand varchar(20))' at line 1
+mysql> create table product(cid int(10),brand varchar(20));
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> select * from product;
+Empty set (0.00 sec)
+
+mysql> desc product;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| cid   | int(10)     | YES  |     | NULL    |       |
+| brand | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.03 sec)
+
+mysql> insert into product values(1,'honda;);
+    '> insert into product values(1,'honda');
+    '> ;
+    '> ;
+    '>
+    '>
+    '>
+    '>
+    '>
+    '> cls
+    '> insert into product values(1,'honda');
+    '> use Adventureworks;
+    '> select * from product;
+    '> ;
+    '>
+    '> ;';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'honda');
+;
+;
+
+
+
+
+
+cls
+insert into product values(1,'honda');
+use Adventureworks;' at line 1
+mysql> ;
+ERROR:
+No query specified
+
+mysql>
+mysql> select * from product;
+Empty set (0.00 sec)
+
+mysql> insert into product values(1,'honda');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into product values(1,'suzuki');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into product values(3,'bajaj');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into product values(4,'hero');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into product values(5,'mahindra');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from product;
++------+----------+
+| cid  | brand    |
++------+----------+
+|    1 | honda    |
+|    1 | suzuki   |
+|    3 | bajaj    |
+|    4 | hero     |
+|    5 | mahindra |
++------+----------+
+5 rows in set (0.00 sec)
+
+mysql> desc product;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| cid   | int(10)     | YES  |     | NULL    |       |
+| brand | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> update product set cid=2 where brand='suzuki';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from product;
++------+----------+
+| cid  | brand    |
++------+----------+
+|    1 | honda    |
+|    2 | suzuki   |
+|    3 | bajaj    |
+|    4 | hero     |
+|    5 | mahindra |
++------+----------+
+5 rows in set (0.00 sec)
+
+mysql> delete from product where cid=2;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from product;
++------+----------+
+| cid  | brand    |
++------+----------+
+|    1 | honda    |
+|    3 | bajaj    |
+|    4 | hero     |
+|    5 | mahindra |
++------+----------+
+4 rows in set (0.00 sec)
+
+mysql> delete product;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near '' at line 1
+mysql> delete from  product;
+Query OK, 4 rows affected (0.03 sec)
+
+mysql> select * from product;
+Empty set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from product;
+Empty set (0.00 sec)
+
+mysql> insert into product values(1,'honda');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into product values(2,'suzuki');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into product values(3,'suzuki');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from product;
++------+--------+
+| cid  | brand  |
++------+--------+
+|    1 | honda  |
+|    2 | suzuki |
+|    3 | suzuki |
++------+--------+
+3 rows in set (0.00 sec)
+
+mysql> drop table product;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> select * from product;
+ERROR 1146 (42S02): Table 'adventureworks.product' doesn't exist
+mysql> create table product(cid int(10)primary key,brand varchar(20));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc product;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| cid   | int(10)     | NO   | PRI | NULL    |       |
+| brand | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into product values(1,'suzuki');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into product values(1,'honda');
+ERROR 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
+mysql> insert into product values(2,'honda;);
+   | mydb               |
+| mydb1              |
+| mypack             |
+| mysql              |
+| newdata            |
+| nn                 |
+| practical          |
+| pushkaraj_exam     |
+| rahul              |
+| rdb                |
+| sdb                |
+| shruti             |
+| sona               |
+| star               |
+| student_portal     |
+| swapdata           |
+| test               |
+| travaller          |
+| val                |
+| vehicleconfig      |
++--------------------+
+31 rows in set (0.00 sec)
+
+mysql> DESC mart;
+ERROR 1046 (3D000): No database selected
+mysql> SELECT mart;
+ERROR 1054 (42S22): Unknown column 'mart' in 'field list'
+mysql> CREATE DATABASE Adventureworks;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> USE Adventureworks;
+Database changed
+mysql> CREATE TABLE product category(CID int,NAME varchar(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'category(CID int,NAME varchar(20))' at line 1
+mysql> create table product(cid number,brand varchar(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'number,brand varchar(20))' at line 1
+mysql> create table product(cid number(10),brand varchar(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'number(10),brand varchar(20))' at line 1
+mysql> create table product(cid int(10),brand varchar(20));
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> select * from product;
+Empty set (0.00 sec)
+
+mysql> desc product;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| cid   | int(10)     | YES  |     | NULL    |       |
+| brand | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.03 sec)
+
+mysql> insert into product values(1,'honda;);
+    '> insert into product values(1,'honda');
+    '> ;
+    '> ;
+    '>
+    '>
+    '>
+    '>
+    '>
+    '> cls
+    '> insert into product values(1,'honda');
+    '> use Adventureworks;
+    '> select * from product;
+    '> ;
+    '>
+    '> ;';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'honda');
+;
+;
+
+
+
+
+
+cls
+insert into product values(1,'honda');
+use Adventureworks;' at line 1
+mysql> ;
+ERROR:
+No query specified
+
+mysql>
+mysql> select * from product;
+Empty set (0.00 sec)
+
+mysql> insert into product values(1,'honda');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into product values(1,'suzuki');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into product values(3,'bajaj');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into product values(4,'hero');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into product values(5,'mahindra');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from product;
++------+----------+
+| cid  | brand    |
++------+----------+
+|    1 | honda    |
+|    1 | suzuki   |
+|    3 | bajaj    |
+|    4 | hero     |
+|    5 | mahindra |
++------+----------+
+5 rows in set (0.00 sec)
+
+mysql> desc product;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| cid   | int(10)     | YES  |     | NULL    |       |
+| brand | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> update product set cid=2 where brand='suzuki';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from product;
++------+----------+
+| cid  | brand    |
++------+----------+
+|    1 | honda    |
+|    2 | suzuki   |
+|    3 | bajaj    |
+|    4 | hero     |
+|    5 | mahindra |
++------+----------+
+5 rows in set (0.00 sec)
+
+mysql> delete from product where cid=2;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from product;
++------+----------+
+| cid  | brand    |
++------+----------+
+|    1 | honda    |
+|    3 | bajaj    |
+|    4 | hero     |
+|    5 | mahindra |
++------+----------+
+4 rows in set (0.00 sec)
+
+mysql> delete product;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near '' at line 1
+mysql> delete from  product;
+Query OK, 4 rows affected (0.03 sec)
+
+mysql> select * from product;
+Empty set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from product;
+Empty set (0.00 sec)
+
+mysql> insert into product values(1,'honda');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into product values(2,'suzuki');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into product values(3,'suzuki');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from product;
++------+--------+
+| cid  | brand  |
++------+--------+
+|    1 | honda  |
+|    2 | suzuki |
+|    3 | suzuki |
++------+--------+
+3 rows in set (0.00 sec)
+
+mysql> drop table product;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> select * from product;
+ERROR 1146 (42S02): Table 'adventureworks.product' doesn't exist
+mysql> create table product(cid int(10)primary key,brand varchar(20));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc product;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| cid   | int(10)     | NO   | PRI | NULL    |       |
+| brand | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into product values(1,'suzuki');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into product values(1,'honda');
+ERROR 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
+mysql> insert into product values(2,'honda;);
+    '>
+  
+  Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 5.1.38-community MySQL Community Server (GPL)
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| adventureworks     |
+| ashvit             |
+| emart              |
+| etour              |
+| etravel            |
+| exam               |
+| hotel_order        |
+| hotelbooking       |
+| loginpage          |
+| mart               |
+| meenal             |
+| mydb               |
+| mydb1              |
+| mypack             |
+| mysql              |
+| newdata            |
+| nn                 |
+| practical          |
+| pushkaraj_exam     |
+| rahul              |
+| rdb                |
+| sdb                |
+| shruti             |
+| sona               |
+| star               |
+| student_portal     |
+| swapdata           |
+| test               |
+| travaller          |
+| val                |
+| vehicleconfig      |
++--------------------+
+32 rows in set (0.08 sec)
+
+mysql> use adventureworks
+Database changed
+mysql> use adventureworks;
+Database changed
+mysql> create table product;
+ERROR 1050 (42S01): Table 'product' already exists
+mysql> desc adventureworks
+    -> ;
+ERROR 1146 (42S02): Table 'adventureworks.adventureworks' doesn't exist
+mysql> desc product;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| cid   | int(10)     | NO   | PRI | NULL    |       |
+| brand | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * adventureworks;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'adventureworks' at line 1
+mysql> select * from product;
++-----+--------+
+| cid | brand  |
++-----+--------+
+|   1 | suzuki |
++-----+--------+
+1 row in set (0.00 sec)
+
+mysql> insert into product values(2,'misc');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from product;
++-----+--------+
+| cid | brand  |
++-----+--------+
+|   1 | suzuki |
+|   2 | misc   |
++-----+--------+
+2 rows in set (0.02 sec)
+
+mysql> update from product set brand='miscelleneous' where cid=2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'from product set brand='miscelleneous' where cid=
+2' at line 1
+mysql> update product set brand='miscelleneous' where cid=2;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from product;
++-----+---------------+
+| cid | brand         |
++-----+---------------+
+|   1 | suzuki        |
+|   2 | miscelleneous |
++-----+---------------+
+2 rows in set (0.02 sec)
+
+mysql> select cid,brand where cid=1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'where cid=1' at line 1
+mysql> select cid,brand from product  where cid=1;
++-----+--------+
+| cid | brand  |
++-----+--------+
+|   1 | suzuki |
++-----+--------+
+1 row in set (0.00 sec)Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 5.1.38-community MySQL Community Server (GPL)
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| adventureworks     |
+| ashvit             |
+| emart              |
+| etour              |
+| etravel            |
+| exam               |
+| hotel_order        |
+| hotelbooking       |
+| loginpage          |
+| mart               |
+| meenal             |
+| mydb               |
+| mydb1              |
+| mypack             |
+| mysql              |
+| newdata            |
+| nn                 |
+| practical          |
+| pushkaraj_exam     |
+| rahul              |
+| rdb                |
+| sdb                |
+| shruti             |
+| sona               |
+| star               |
+| student_portal     |
+| swapdata           |
+| test               |
+| travaller          |
+| val                |
+| vehicleconfig      |
++--------------------+
+32 rows in set (0.48 sec)
+
+mysql> selsect adventureworks;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'selsect adventureworks' at line 1
+mysql> select adventureworks;
+ERROR 1054 (42S22): Unknown column 'adventureworks' in 'field list'
+mysql> desc adventureworks;
+ERROR 1046 (3D000): No database selected
+mysql> use adventureworks;
+Database changed
+mysql> desc adventureworks;
+ERROR 1146 (42S02): Table 'adventureworks.adventureworks' doesn't exist
+mysql> desc product;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| cid   | int(10)     | NO   | PRI | NULL    |       |
+| brand | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.11 sec)
+
+mysql>  select * from product;
++-----+---------------+
+| cid | brand         |
++-----+---------------+
+|   0 | miscelleneous |
+|   1 | suzuki        |
++-----+---------------+
+2 rows in set (0.06 sec)
+
+mysql> update product set cid=0 where brand='miscelleneous';
+Query OK, 0 rows affected (0.01 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql>  select * from product;
++-----+---------------+
+| cid | brand         |
++-----+---------------+
+|   0 | miscelleneous |
+|   1 | suzuki        |
++-----+---------------+
+2 rows in set (0.00 sec)
+
+mysql> update product set cid=2 where brand='suzuki';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update product set cid=1 where brand='miscelleneous';
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  select * from product;
++-----+---------------+
+| cid | brand         |
++-----+---------------+
+|   1 | miscelleneous |
+|   2 | suzuki        |
++-----+---------------+
+2 rows in set (0.00 sec)
+
+mysql> insert into product values(3,'bajaj');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into product values(4,'hero');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into product values(5,'mahindra');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * product;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'product' at line 1
+mysql> select * from product;
++-----+---------------+
+| cid | brand         |
++-----+---------------+
+|   1 | miscelleneous |
+|   2 | suzuki        |
+|   3 | bajaj         |
+|   4 | hero          |
+|   5 | mahindra      |
++-----+---------------+
+5 rows in set (0.02 sec)
+
+mysql> truncate adventureworks;
+ERROR 1146 (42S02): Table 'adventureworks.adventureworks' doesn't exist
+mysql> truncate product;
+Query OK, 0 rows affected (0.27 sec)
+
+mysql> select * from product;
+Empty set (0.02 sec)
+
+mysql> insert into product values (1.'Bikes');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near ''Bikes')' at line 1
+mysql> insert into product values(1.'Bikes');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near ''Bikes')' at line 1
+mysql> insert into product values(1,'Bikes');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into product values(2,'Accessories');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into product values(3,'Clothing');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into product values(4,'Components');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into product values(5,'Miscelleneous');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from prduct;
+ERROR 1146 (42S02): Table 'adventureworks.prduct' doesn't exist
+mysql> select * from product;
++-----+---------------+
+| cid | brand         |
++-----+---------------+
+|   1 | Bikes         |
+|   2 | Accessories   |
+|   3 | Clothing      |
+|   4 | Components    |
+|   5 | Miscelleneous |
++-----+---------------+
+5 rows in set (0.00 sec)
+
+mysql> update product set brand='misc' where cid=5;
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from product;
++-----+-------------+
+| cid | brand       |
++-----+-------------+
+|   1 | Bikes       |
+|   2 | Accessories |
+|   3 | Clothing    |
+|   4 | Components  |
+|   5 | misc        |
++-----+-------------+
+5 rows in set (0.00 sec)
+
+mysql> delete product where cid='5';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'where cid='5'' at line 1
+mysql> delete from product where cid='5';
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from product;
++-----+-------------+
+| cid | brand       |
++-----+-------------+
+|   1 | Bikes       |
+|   2 | Accessories |
+|   3 | Clothing    |
+|   4 | Components  |
++-----+-------------+
+4 rows in set (0.00 sec)
+
+mysql> delete product;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near '' at line 1
+mysql> delete from product;
+Query OK, 4 rows affected (0.03 sec)
+
+mysql> select * from product;
+Empty set (0.00 sec)
+
+mysql> insert into product values(1,'Bikes');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into product values(2,'Accessories');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from product;
++-----+-------------+
+| cid | brand       |
++-----+-------------+
+|   1 | Bikes       |
+|   2 | Accessories |
++-----+-------------+
+2 rows in set (0.00 sec)
+
+mysql> drop product;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'product' at line 1
+mysql> drop from product;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'from product' at line 1
+mysql> drop table product;
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> select * from product;
+ERROR 1146 (42S02): Table 'adventureworks.product' doesn't exist
+mysql> desc product;
+ERROR 1146 (42S02): Table 'adventureworks.product' doesn't exist
+mysql>
+
