@@ -1,0 +1,300 @@
+
+mysql> insert into numdatatypes values(130,130,33456,333456,33333456,9999999.99,99999999.99,99999999.9
+9);
+ERROR 1264 (22003): Out of range value for column 'A' at row 1
+mysql> insert into numdatatypes values(13,130,33456,333456,33333456,9999999.99,99999999.99,99999999.99
+);
+ERROR 1264 (22003): Out of range value for column 'F' at row 1
+mysql> insert into numdatatypes values(13,130,33456,333456,33333456,99999.99,99999999.99,99999999.99);
+
+ERROR 1264 (22003): Out of range value for column 'G' at row 1
+mysql> insert into numdatatypes values(13,130,33456,333456,33333456,99999.99,9999999.99,9999999.99);
+ERROR 1264 (22003): Out of range value for column 'G' at row 1
+mysql> insert into numdatatypes values(13,130,33456,333456,33333456,99999.99,9999999.99,999999.99);
+ERROR 1264 (22003): Out of range value for column 'G' at row 1
+mysql> insert into numdatatypes values(13,130,33456,333456,33333456,99999.99,9999999.99,99999.99);
+ERROR 1264 (22003): Out of range value for column 'G' at row 1
+mysql> insert into numdatatypes values(13,130,33456,333456,33333456,99999.99,9999999.99,99999.99);
+ERROR 1264 (22003): Out of range value for column 'G' at row 1
+mysql> INSERT INTO NumDatatypes VALUES
+    -> (13, 130, 33456, 333456, 33333456,
+    -> 999999.99, 999999.99, 999999.99);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO NumDatatypes VALUES
+    -> (110, 234, 3345, 33345, 3333345,
+    -> 999999.9, 999999.99, 999999.99);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>
+mysql> select * from numdatatypes;
++------+------+-------+--------+----------+-----------+-----------+--------+
+| A    | B    | C     | D      | E        | F         | G         | H      |
++------+------+-------+--------+----------+-----------+-----------+--------+
+|   13 |  130 | 33456 | 333456 | 33333456 | 999999.99 | 999999.99 | 1e+006 |
+|  110 |  234 |  3345 |  33345 |  3333345 | 999999.90 | 999999.99 | 1e+006 |
++------+------+-------+--------+----------+-----------+-----------+--------+
+2 rows in set (0.02 sec)
+
+mysql> create table datatypes values(current_date(),now(),now(),now());
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'values(current_date(),now(),now(),now())' at line
+ 1
+mysql> create table datatypes(A date,B datetime,C timestamp,D time);
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> create table datedatatypes(A date,B datetime,C timestamp,D time);
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> insert into datedatatypes values(current_date(),now(),now(),now());
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from datedatatypes;
++------------+---------------------+---------------------+----------+
+| A          | B                   | C                   | D        |
++------------+---------------------+---------------------+----------+
+| 2019-08-26 | 2019-08-26 19:36:06 | 2019-08-26 19:36:06 | 19:36:06 |
++------------+---------------------+---------------------+----------+
+1 row in set (0.00 sec)
+
+mysql> insert into datedatatypes values('2019-08-26','2019-08-26 10:30:23456','20190826103023456','10:
+30:23');
+ERROR 1292 (22007): Incorrect datetime value: '2019-08-26 10:30:23456' for column 'B' at row 1
+mysql> insert into datedatatypes values('2019-08-26','2019-08-2610:30:23456','20190826103023456','10:3
+0:23');
+ERROR 1292 (22007): Incorrect datetime value: '2019-08-2610:30:23456' for column 'B' at row 1
+mysql> insert into datedatatypes values('2019-08-26','2019-08-26 10:30:23','20190826103023456','10:30:
+23');
+ERROR 1292 (22007): Incorrect datetime value: '20190826103023456' for column 'C' at row 1
+mysql> insert into datedatatypes values('2019-08-26','2019-08-26 10:30:23','20190826103023','10:30:23'
+);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from datedatatypes;
++------------+---------------------+---------------------+----------+
+| A          | B                   | C                   | D        |
++------------+---------------------+---------------------+----------+
+| 2019-08-26 | 2019-08-26 19:36:06 | 2019-08-26 19:36:06 | 19:36:06 |
+| 2019-08-26 | 2019-08-26 10:30:23 | 2019-08-26 10:30:23 | 10:30:23 |
++------------+---------------------+---------------------+----------+
+2 rows in set (0.00 sec)
+
+mysql> create table spldatatypes(id int auto_increment primary key,membership enum('silver','gold','pl
+atinum');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near '' at line 1
+mysql>
+mysql>
+mysql> CREATE TABLE SplDataTypes
+    -> (
+    ->   ID int AUTO_INCREMENT
+    ->   primary key,
+    ->   Membership ENUM('Silver',
+    ->   'Gold', 'Platinum'),
+    ->   Hobbies SET('Swimming',
+    ->   'Sking', 'Cricket',
+    ->   'Football')
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> insert into spldatatypes values('silver',('sking','football'));
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into spldatatypes(membership,hobbies)values('silver',('sking','football'));
+ERROR 1241 (21000): Operand should contain 1 column(s)
+mysql> insert into spldatatypes(membership,hobbies) values ('silver','sking','football');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into spldatatypes(Membership,Hobbies) values ('Silver','Sking','Football');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into spldatatypes(Membership,Hobbies)values('Silver','Sking','Football');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql>
+mysql> INSERT INTO SplDataTypes
+    -> (Membership, Hobbies)
+    ->  VALUES
+    -> ('Silver',
+    ->  'Sking,bowling'
+    -> );
+ERROR 1265 (01000): Data truncated for column 'Hobbies' at row 1
+mysql> INSERT INTO SplDataTypes
+    -> (Membership, Hobbies)
+    ->  VALUES
+    -> ('Silver',
+    -> 'bowling');
+ERROR 1265 (01000): Data truncated for column 'Hobbies' at row 1
+mysql> desc spldatatypes;
++------------+----------------------------------------------+------+-----+---------+----------------+
+| Field      | Type                                         | Null | Key | Default | Extra          |
++------------+----------------------------------------------+------+-----+---------+----------------+
+| ID         | int(11)                                      | NO   | PRI | NULL    | auto_increment |
+| Membership | enum('Silver','Gold','Platinum')             | YES  |     | NULL    |                |
+| Hobbies    | set('Swimming','Sking','Cricket','Football') | YES  |     | NULL    |                |
++------------+----------------------------------------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> insert into spldatatypes(membership,hobbies) values ('silver','football');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into spldatatypes(membership,hobbies) values ('gold','bowling');
+ERROR 1265 (01000): Data truncated for column 'Hobbies' at row 1
+mysql> select * from spldatatypes;
++----+------------+----------+
+| ID | Membership | Hobbies  |
++----+------------+----------+
+|  1 | Silver     | Football |
++----+------------+----------+
+1 row in set (0.02 sec)
+
+mysql> SORTING..........
+    ->
+    ->
+    -> SELECT * FROM productcategory ORDER BY NAME ASC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'SORTING..........
+
+
+SELECT * FROM productcategory ORDER BY NAME ASC' at line 1
+mysql> SELECT * FROM productcategory ORDER BY NAME ASC;
+ERROR 1146 (42S02): Table 'adventureworks.productcategory' doesn't exist
+mysql> CREATE PROCAT
+    -> CREATE TABLE PROCAT
+    -> (
+    -> ID,NAME,PRICE
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'PROCAT
+CREATE TABLE PROCAT
+(
+ID,NAME,PRICE
+)' at line 1
+mysql> CREATE TABLE PROCAT
+    -> (
+    -> ID,NAME,PRICE
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'NAME,PRICE
+)' at line 3
+mysql> CREATE TABLE PROCAT
+    -> (
+    -> ID,
+    -> NAME,
+    -> PRICE
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near '
+NAME,
+PRICE
+)' at line 3
+mysql> CREATE TABLE PROCAT
+    -> (
+    -> ID INT PRIMARY KEY,
+    -> NAME VARCHAR(20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near '' at line 4
+mysql> CREATE TABLE PROCAT
+    -> (
+    -> ID INT,
+    -> NAME VARCHAR(10),
+    -> PRICE MEDIUMINT,
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near ')' at line 6
+mysql> CREATE TABLE PROCAT
+    -> (
+    -> ID INT,
+    -> NAME VARCHAR(10),
+    -> PRICE MEDIUMINT
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> INSERT INTO PROCAT VALUES(1,'ABC',4000);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO PROCAT VALUES(1,'DEF',2300);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> UPDATE  PROCAT SET ID=2 WHERE NAME='DEF';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> INSERT INTO PROCAT VALUES(3,'GHI',6260);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM PROCAT;
++------+------+-------+
+| ID   | NAME | PRICE |
++------+------+-------+
+|    1 | ABC  |  4000 |
+|    2 | DEF  |  2300 |
+|    3 | GHI  |  6260 |
++------+------+-------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM PROCAT ORDER BY NAME ASC;
++------+------+-------+
+| ID   | NAME | PRICE |
++------+------+-------+
+|    1 | ABC  |  4000 |
+|    2 | DEF  |  2300 |
+|    3 | GHI  |  6260 |
++------+------+-------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM PROCAT ORDER BY NAME DESC;
++------+------+-------+
+| ID   | NAME | PRICE |
++------+------+-------+
+|    3 | GHI  |  6260 |
+|    2 | DEF  |  2300 |
+|    1 | ABC  |  4000 |
++------+------+-------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT PROCATID AS ID,NAME FROM PROCAT ORDER BY PROCAT ID DEC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'ID DEC' at line 1
+mysql> SELECT PROCATID AS ID,NAME FROM PROCAT ORDER BY PROCATID DEC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'DEC' at line 1
+mysql> SELECT PROCATID AS ID,NAME FROM PROCAT ORDER BY PROCATID DESC;
+ERROR 1054 (42S22): Unknown column 'PROCATID' in 'field list'
+mysql> SELECT PROCAT ID AS ID,NAME FROM PROCAT ORDER BY PROCAT ID DESC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'AS ID,NAME FROM PROCAT ORDER BY PROCAT ID DESC' a
+t line 1
+mysql> SELECT PROCATID AS ID,NAME FROM PROCAT ORDER BY PROCATID DESC;
+ERROR 1054 (42S22): Unknown column 'PROCATID' in 'field list'
+mysql> SELECT ID AS ID,NAME FROM PROCAT ORDER BY ID DESC;
++------+------+
+| ID   | NAME |
++------+------+
+|    3 | GHI  |
+|    2 | DEF  |
+|    1 | ABC  |
++------+------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT ID AS ID,NAME FROM PROCAT ORDER BY ID ASC;
++------+------+
+| ID   | NAME |
++------+------+
+|    1 | ABC  |
+|    2 | DEF  |
+|    3 | GHI  |
++------+------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT *
+    ->   FROM ProductSubcategory
+    ->   ORDER BY ProductCategoryID;
+ERROR 1146 (42S02): Table 'adventureworks.productsubcategory' doesn't exist
+mysql> SELECT * FROM PROCAT ORDER BY ID;
++------+------+-------+
+| ID   | NAME | PRICE |
++------+------+-------+
+|    1 | ABC  |  4000 |
+|    2 | DEF  |  2300 |
+|    3 | GHI  |  6260 |
++------+------+-------+
+3 rows in set (0.00 sec)
+
+mysql>
