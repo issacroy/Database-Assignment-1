@@ -1,0 +1,605 @@
++------+-------+
+1 row in set (0.00 sec)
+
+mysql> select name,price from procat where name like'%b';
+Empty set (0.00 sec)
+
+mysql> select name,price from procat where name like'a%';
++------+-------+
+| name | price |
++------+-------+
+| ABC  |  4000 |
++------+-------+
+1 row in set (0.00 sec)
+
+mysql> select name,price from procat where name like'b%';
+Empty set (0.00 sec)
+
+mysql> select name,price from procat where name like'c%';
+Empty set (0.00 sec)
+
+mysql> select name,price from procat where name like'__c';
++------+-------+
+| name | price |
++------+-------+
+| ABC  |  4000 |
++------+-------+
+1 row in set (0.00 sec)
+
+mysql> select name,price from procat where name like'c____';
+Empty set (0.00 sec)
+
+mysql> select name,price from procat where name like'a__';
++------+-------+
+| name | price |
++------+-------+
+| ABC  |  4000 |
++------+-------+
+1 row in set (0.00 sec)
+
+mysql> select name,price from procat where name like'a____';
+Empty set (0.00 sec)
+
+mysql> select * from procat;
++------+------+-------+
+| ID   | NAME | PRICE |
++------+------+-------+
+|    1 | ABC  |  4000 |
+|    2 | DEF  |  2300 |
+|    3 | GHI  |  6260 |
++------+------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into procat values(4,'banking',2500);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> select * from procat;
++------+---------+-------+
+| ID   | NAME    | PRICE |
++------+---------+-------+
+|    1 | ABC     |  4000 |
+|    2 | DEF     |  2300 |
+|    3 | GHI     |  6260 |
+|    4 | banking |  2500 |
++------+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> insert into procat values(5,'anking',2600);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from procat;
++------+---------+-------+
+| ID   | NAME    | PRICE |
++------+---------+-------+
+|    1 | ABC     |  4000 |
+|    2 | DEF     |  2300 |
+|    3 | GHI     |  6260 |
+|    4 | banking |  2500 |
+|    5 | anking  |  2600 |
++------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select name,price from procat where name like'%a%';
++---------+-------+
+| name    | price |
++---------+-------+
+| ABC     |  4000 |
+| banking |  2500 |
+| anking  |  2600 |
++---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into procat values (6, banaking, 3000);
+ERROR 1054 (42S22): Unknown column 'banaking' in 'field list'
+mysql> insert into procat values (6,'banaking', 3000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * form procat;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'form procat' at line 1
+mysql> select * from procat;
++------+----------+-------+
+| ID   | NAME     | PRICE |
++------+----------+-------+
+|    1 | ABC      |  4000 |
+|    2 | DEF      |  2300 |
+|    3 | GHI      |  6260 |
+|    4 | banking  |  2500 |
+|    5 | anking   |  2600 |
+|    6 | banaking |  3000 |
++------+----------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select * from procat where name like '%a%';
++------+----------+-------+
+| ID   | NAME     | PRICE |
++------+----------+-------+
+|    1 | ABC      |  4000 |
+|    4 | banking  |  2500 |
+|    5 | anking   |  2600 |
+|    6 | banaking |  3000 |
++------+----------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from procat where name like '%ana%';
++------+----------+-------+
+| ID   | NAME     | PRICE |
++------+----------+-------+
+|    6 | banaking |  3000 |
++------+----------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from procat where name like 'ana%';
+Empty set (0.00 sec)
+
+mysql> select * from procat where name like '%ana';
+Empty set (0.00 sec)
+
+mysql> select * from procat where name like '%ana%';
++------+----------+-------+
+| ID   | NAME     | PRICE |
++------+----------+-------+
+|    6 | banaking |  3000 |
++------+----------+-------+
+1 row in set (0.00 sec)
+
+mysql> show tables;
++--------------------------+
+| Tables_in_adventureworks |
++--------------------------+
+| datatypes                |
+| datedatatypes            |
+| numdatatypes             |
+| procat                   |
+| spldatatypes             |
+| textdatatypes            |
++--------------------------+
+6 rows in set (0.09 sec)
+
+mysql> create table xyz;
+ERROR 1113 (42000): A table must have at least 1 column
+mysql> show tables;
++--------------------------+
+| Tables_in_adventureworks |
++--------------------------+
+| datatypes                |
+| datedatatypes            |
+| numdatatypes             |
+| procat                   |
+| spldatatypes             |
+| textdatatypes            |
++--------------------------+
+6 rows in set (0.00 sec)
+
+mysql> create table xyz (
+    -> date_format(date, '%d-%m-%y'),
+    -> id int primary key auto_increment);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near '(date, '%d-%m-%y'),
+id int primary key auto_increment)' at line 2
+mysql> create table xyz (
+    -> date_format(date, '%d-%m-%y'));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near '(date, '%d-%m-%y'))' at line 2
+mysql> desc datatypes;
++-------+-----------+------+-----+-------------------+-----------------------------+
+| Field | Type      | Null | Key | Default           | Extra                       |
++-------+-----------+------+-----+-------------------+-----------------------------+
+| A     | date      | YES  |     | NULL              |                             |
+| B     | datetime  | YES  |     | NULL              |                             |
+| C     | timestamp | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
+| D     | time      | YES  |     | NULL              |                             |
++-------+-----------+------+-----+-------------------+-----------------------------+
+4 rows in set (0.02 sec)
+
+mysql> create table tata(id int,name varchar(10),date);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near ')' at line 1
+mysql> create table tata(id int,name varchar(10),d date);
+Query OK, 0 rows affected (0.11 sec)
+
+mysql>    insert into tata values(1,'abcd',2019-08-27);
+ERROR 1292 (22007): Incorrect date value: '1984' for column 'd' at row 1
+mysql>    insert into tata values(1,'abcd',19-08-27);
+ERROR 1292 (22007): Incorrect date value: '-16' for column 'd' at row 1
+mysql>    insert into tata values(1,'abcd',1990-08-27);
+ERROR 1292 (22007): Incorrect date value: '1955' for column 'd' at row 1
+mysql>    insert into tata values(1,'abcd',1980-08-27);
+ERROR 1292 (22007): Incorrect date value: '1945' for column 'd' at row 1
+mysql>    insert into tata values(1,'abcd',1800-08-27);
+ERROR 1292 (22007): Incorrect date value: '1765' for column 'd' at row 1
+mysql>    insert into tata values(1,'abcd',27-08-2019);
+ERROR 1292 (22007): Incorrect date value: '-2000' for column 'd' at row 1
+mysql>    insert into tata values(1,'abcd',27-08-1990);
+ERROR 1292 (22007): Incorrect date value: '-1971' for column 'd' at row 1
+mysql>    insert into tata values(1,'abcd','27-08-1990');
+ERROR 1292 (22007): Incorrect date value: '27-08-1990' for column 'd' at row 1
+mysql> desc tata;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int(11)     | YES  |     | NULL    |       |
+| name  | varchar(10) | YES  |     | NULL    |       |
+| d     | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql>    insert into tata values(1,'abcd',"2019-08-27");
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from tata;
++------+------+------------+
+| id   | name | d          |
++------+------+------------+
+|    1 | abcd | 2019-08-27 |
++------+------+------------+
+1 row in set (0.00 sec)
+
+mysql>    insert into tata values(1,'abcd',"20-08-2708");
+ERROR 1292 (22007): Incorrect date value: '20-08-2708' for column 'd' at row 1
+mysql>    insert into tata values(2,'abcd',"20-08-2708");
+ERROR 1292 (22007): Incorrect date value: '20-08-2708' for column 'd' at row 1
+mysql>    insert into tata values(2,'abcd',"2098-08-27");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from tata;
++------+------+------------+
+| id   | name | d          |
++------+------+------------+
+|    1 | abcd | 2019-08-27 |
+|    2 | abcd | 2098-08-27 |
++------+------+------------+
+2 rows in set (0.00 sec)
+
+mysql> alter table tata add column salary int not null;
+Query OK, 2 rows affected (0.22 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from tata;
++------+------+------------+--------+
+| id   | name | d          | salary |
++------+------+------------+--------+
+|    1 | abcd | 2019-08-27 |      0 |
+|    2 | abcd | 2098-08-27 |      0 |
++------+------+------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> alter table tata modify column salary int null;
+Query OK, 2 rows affected (0.17 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from tata;
++------+------+------------+--------+
+| id   | name | d          | salary |
++------+------+------------+--------+
+|    1 | abcd | 2019-08-27 |      0 |
+|    2 | abcd | 2098-08-27 |      0 |
++------+------+------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> update tata set salary=2000 where id=1 and salary=3500 where id=2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'where id=2' at line 1
+mysql> update tata set salary=2000 where id=1;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update tata set salary=3500 where id=2;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from tata;
++------+------+------------+--------+
+| id   | name | d          | salary |
++------+------+------------+--------+
+|    1 | abcd | 2019-08-27 |   2000 |
+|    2 | abcd | 2098-08-27 |   3500 |
++------+------+------------+--------+
+2 rows in set (0.00 sec)
+
+mysql>
+
+
+
+
+| book               |
+| emart              |
+| etour              |
+| etravel            |
+| exam               |
+| hotel_order        |
+| hotelbooking       |
+| loginpage          |
+| mart               |
+| meenal             |
+| mydb               |
+| mydb1              |
+| mypack             |
+| mysql              |
+| newdata            |
+| nn                 |
+| practical          |
+| pushkaraj_exam     |
+| rahul              |
+| rdb                |
+| sdb                |
+| shruti             |
+| sona               |
+| star               |
+| student_portal     |
+| swapdata           |
+| test               |
+| travaller          |
+| val                |
+| vehicleconfig      |
++--------------------+
+33 rows in set (0.23 sec)
+
+mysql> use adventureworks;
+Database changed
+mysql> show tables;
++--------------------------+
+| Tables_in_adventureworks |
++--------------------------+
+| datatypes                |
+| datedatatypes            |
+| numdatatypes             |
+| procat                   |
+| spldatatypes             |
+| tata                     |
+| textdatatypes            |
++--------------------------+
+7 rows in set (0.16 sec)
+
+mysql> select * datatypes;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'datatypes' at line 1
+mysql> desc datatypes;
++-------+-----------+------+-----+-------------------+-----------------------------+
+| Field | Type      | Null | Key | Default           | Extra                       |
++-------+-----------+------+-----+-------------------+-----------------------------+
+| A     | date      | YES  |     | NULL              |                             |
+| B     | datetime  | YES  |     | NULL              |                             |
+| C     | timestamp | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
+| D     | time      | YES  |     | NULL              |                             |
++-------+-----------+------+-----+-------------------+-----------------------------+
+4 rows in set (0.00 sec)
+
+mysql> desc datedatatypes;
++-------+-----------+------+-----+-------------------+-----------------------------+
+| Field | Type      | Null | Key | Default           | Extra                       |
++-------+-----------+------+-----+-------------------+-----------------------------+
+| A     | date      | YES  |     | NULL              |                             |
+| B     | datetime  | YES  |     | NULL              |                             |
+| C     | timestamp | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
+| D     | time      | YES  |     | NULL              |                             |
++-------+-----------+------+-----+-------------------+-----------------------------+
+4 rows in set (0.03 sec)
+
+mysql> desc procat;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| ID    | int(11)      | YES  |     | NULL    |       |
+| NAME  | varchar(10)  | YES  |     | NULL    |       |
+| PRICE | mediumint(9) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> desc tata;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int(11)     | YES  |     | NULL    |       |
+| name   | varchar(10) | YES  |     | NULL    |       |
+| d      | date        | YES  |     | NULL    |       |
+| salary | int(11)     | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> show procat;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'procat' at line 1
+mysql> select * from procat;
++------+----------+-------+
+| ID   | NAME     | PRICE |
++------+----------+-------+
+|    1 | ABC      |  4000 |
+|    2 | DEF      |  2300 |
+|    3 | GHI      |  6260 |
+|    4 | banking  |  2500 |
+|    5 | anking   |  2600 |
+|    6 | banaking |  3000 |
++------+----------+-------+
+6 rows in set (0.00 sec)
+
+mysql> update procat set name='JKL' where procatprice=2500;
+ERROR 1054 (42S22): Unknown column 'procatprice' in 'where clause'
+mysql> update procat set name='JKL' where price=2500;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update procat set name='MNO' where price=2500;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update procat set name='JKL' where price=2500;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update procat set name='MNO' where price=2600;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update procat set name='PQR' where price=3000;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from procat;
++------+------+-------+
+| ID   | NAME | PRICE |
++------+------+-------+
+|    1 | ABC  |  4000 |
+|    2 | DEF  |  2300 |
+|    3 | GHI  |  6260 |
+|    4 | JKL  |  2500 |
+|    5 | MNO  |  2600 |
+|    6 | PQR  |  3000 |
++------+------+-------+
+6 rows in set (0.00 sec)
+
+mysql> create table product
+    -> ()
+    -> create table product
+    -> (
+    -> productID AUTO_INCREMENT primary key,
+    -> productNAME varchar(50)not null,
+    -> update procat set ID=ID int AUTO_INCREMENT primary key;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near ')
+create table product
+(
+productID AUTO_INCREMENT primary key,
+productNAME varch' at line 2
+mysql> update procat set ID=ID int AUTO_INCREMENT primary key;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'int AUTO_INCREMENT primary key' at line 1
+mysql> create table product
+    -> (
+    -> productID int AUTO_INCREMENT primary key;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near '' at line 3
+mysql> create table product
+    -> (
+    -> productID int AUTO_INCREMENT primary key,
+    -> productName varchar(50) not null,
+    -> price decimal(4,1)
+    -> );
+Query OK, 0 rows affected (0.33 sec)
+
+mysql> select * from product;
+Empty set (0.00 sec)
+
+mysql> desc product;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| productID   | int(11)      | NO   | PRI | NULL    | auto_increment |
+| productName | varchar(50)  | NO   |     | NULL    |                |
+| price       | decimal(4,1) | YES  |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+3 rows in set (0.02 sec)
+
+mysql> insert into product(productname,price) values ('monitor',5000),('keyboard',6000);
+ERROR 1264 (22003): Out of range value for column 'price' at row 1
+mysql> insert into product(productname,price) values ('monitor',500.0),('keyboard',600.3);
+Query OK, 2 rows affected (0.03 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into product(productname,price) values ('mouse',100.8),('motherboard',990.9);
+Query OK, 2 rows affected (0.02 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> selct * from product;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'selct * from product' at line 1
+mysql> select * from product;
++-----------+-------------+-------+
+| productID | productName | price |
++-----------+-------------+-------+
+|         1 | monitor     | 500.0 |
+|         2 | keyboard    | 600.3 |
+|         3 | mouse       | 100.8 |
+|         4 | motherboard | 990.9 |
++-----------+-------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> create table buyer
+    -> (
+    -> buyerID int AUTO_INCREMENT primary key,Bname varchar(20),
+    -> Bphone char(10),
+    -> btype ENUM('RegCust','NotReg')
+    -> );
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> desc buyer;
++---------+--------------------------+------+-----+---------+----------------+
+| Field   | Type                     | Null | Key | Default | Extra          |
++---------+--------------------------+------+-----+---------+----------------+
+| buyerID | int(11)                  | NO   | PRI | NULL    | auto_increment |
+| Bname   | varchar(20)              | YES  |     | NULL    |                |
+| Bphone  | char(10)                 | YES  |     | NULL    |                |
+| btype   | enum('RegCust','NotReg') | YES  |     | NULL    |                |
++---------+--------------------------+------+-----+---------+----------------+
+4 rows in set (0.06 sec)
+
+mysql> insert into buyer (Bname,Bphone,Btype) values ('abc',1234567890,'RegCust'),('def',0123456789,'N
+otReg'),('ghi',2345678901,'RegCust'),('jkl',7890123456,'NotReg');
+Query OK, 4 rows affected (0.03 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from buyer;
++---------+-------+------------+---------+
+| buyerID | Bname | Bphone     | btype   |
++---------+-------+------------+---------+
+|       1 | abc   | 1234567890 | RegCust |
+|       2 | def   | 123456789  | NotReg  |
+|       3 | ghi   | 2345678901 | RegCust |
+|       4 | jkl   | 7890123456 | NotReg  |
++---------+-------+------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> create table purchase
+    -> (
+    -> purID int AUTO_INCREMENT primary key,
+    -> purDate date,
+    -> productID int REFERENCES product(productID),
+    -> buyerID int,
+    -> CONSTRAINT purchase_buyerID_FK FOREIGN KEY(buyerID)
+    -> REFERENCES buyer(buyerID)
+    -> );
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> desc purchase
+    -> ;
++-----------+---------+------+-----+---------+----------------+
+| Field     | Type    | Null | Key | Default | Extra          |
++-----------+---------+------+-----+---------+----------------+
+| purID     | int(11) | NO   | PRI | NULL    | auto_increment |
+| purDate   | date    | YES  |     | NULL    |                |
+| productID | int(11) | YES  |     | NULL    |                |
+| buyerID   | int(11) | YES  | MUL | NULL    |                |
++-----------+---------+------+-----+---------+----------------+
+4 rows in set (0.02 sec)
+
+mysql> insert into purchase(purDate,productID,buyerID) values (now(),1,2),(2000-8-5,1,1);
+ERROR 1292 (22007): Incorrect date value: '1987' for column 'purDate' at row 2
+mysql> insert into purchase(purDate,productID,buyerID) values (now(),1,2),(2000/08/05,1,1);
+ERROR 1292 (22007): Incorrect date value: '50' for column 'purDate' at row 2
+mysql> insert into purchase(purDate,productID,buyerID) values (now(),1,2),(2000/08/5,1,1);
+ERROR 1292 (22007): Incorrect date value: '50' for column 'purDate' at row 2
+mysql> insert into purchase(purDate,productID,buyerID) values (now(),1,2),(2019/08/12,1,1);
+ERROR 1292 (22007): Incorrect date value: '21' for column 'purDate' at row 2
+mysql> insert into purchase(purDate,productID,buyerID) values (now(),1,2),('2019/08/12',1,1);
+Query OK, 2 rows affected, 1 warning (0.03 sec)
+Records: 2  Duplicates: 0  Warnings: 1
+
+mysql> insert into purchase(purDate,productID,buyerID) values ('1998/4/6',2,4),('2019/08/12',3,2),('20
+05/10/06',4,4);
+Query OK, 3 rows affected (0.03 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from purchase;
++-------+------------+-----------+---------+
+| purID | purDate    | productID | buyerID |
++-------+------------+-----------+---------+
+|     7 | 2019-08-27 |         1 |       2 |
+|     8 | 2019-08-12 |         1 |       1 |
+|     9 | 1998-04-06 |         2 |       4 |
+|    10 | 2019-08-12 |         3 |       2 |
+|    11 | 2005-10-06 |         4 |       4 |
++-------+------------+-----------+---------+
+5 rows in set (0.00 sec)
+
+mysql>
+

@@ -1,0 +1,994 @@
+|     7 | 2019-08-27 |         1 |       2 |
+|     8 | 2019-08-12 |         1 |       1 |
+|     9 | 1998-04-06 |         2 |       4 |
+|    10 | 2019-08-12 |         3 |       2 |
+|    11 | 2005-10-06 |         4 |       4 |
++-------+------------+-----------+---------+
+5 rows in set (0.03 sec)
+
+mysql> select * from procat where id=(select id FROM procatINNERJOIN purchase ON id=purid);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'ON id=purid)' at line 1
+mysql> select * from procat where id=(select id FROM procatINNERJOIN purchase ON id=purid);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'ON id=purid)' at line 1
+mysql> select * from procat where id=(select id FROM proca tINNERJOIN purchase ON id=purid);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'purchase ON id=purid)' at line 1
+mysql> select * from procat where id=(select id FROM procat INNERJOIN purchase ON id=purid);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'purchase ON id=purid)' at line 1
+mysql> select * from procat where id=(select ID FROM procat INNERJOIN purchase ON ID=purID);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'purchase ON ID=purID)' at line 1
+mysql> select * from procat where id=(select procat.ID FROM procat INNERJOIN purchase ON procat.ID=pur
+ID);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'purchase ON procat.ID=purID)' at line 1
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql> select * from tata;
++----+------+---------+--------+----------+
+| id | name | address | salary | worktime |
++----+------+---------+--------+----------+
+|  1 | a    | mumbai  |    500 |        5 |
+|  2 | b    | lucknow |   1000 |        9 |
+|  3 | c    | delhi   |    500 |        7 |
+|  4 | d    | mumbai  |   2000 |       10 |
+|  5 | e    | delhi   |    500 |       11 |
++----+------+---------+--------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from product;
++-----------+-------------+-------+
+| productID | productName | price |
++-----------+-------------+-------+
+|         1 | monitor     | 500.0 |
+|         2 | keyboard    | 600.3 |
+|         3 | mouse       | 100.8 |
+|         4 | motherboard | 990.9 |
++-----------+-------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select name,address from tata where salary=(select max(salary) from tata);
++------+---------+
+| name | address |
++------+---------+
+| d    | mumbai  |
++------+---------+
+1 row in set (0.02 sec)
+
+mysql> select * from procat;
++------+------+-------+
+| ID   | NAME | PRICE |
++------+------+-------+
+|    1 | ABC  |  4000 |
+|    2 | DEF  |  2300 |
+|    3 | GHI  |  6260 |
+|    4 | JKL  |  2500 |
+|    5 | MNO  |  2600 |
+|    6 | PQR  |  3000 |
++------+------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select * from purchase;
++-------+------------+-----------+---------+
+| purID | purDate    | productID | buyerID |
++-------+------------+-----------+---------+
+|     7 | 2019-08-27 |         1 |       2 |
+|     8 | 2019-08-12 |         1 |       1 |
+|     9 | 1998-04-06 |         2 |       4 |
+|    10 | 2019-08-12 |         3 |       2 |
+|    11 | 2005-10-06 |         4 |       4 |
++-------+------------+-----------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select * from procat where id=(select ID FROM procat INNERJOIN purchase ON ID=purID);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'purchase ON ID=purID)' at line 1
+mysql> select * from procat where id=(select ID FROM procat INNERJOIN purchase ON procat.ID=purchase.p
+roductID);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'purchase ON procat.ID=purchase.productID)' at lin
+e 1
+mysql> select * from procat where id=(select ID FROM procat INNER JOIN purchase ON procat.ID=purchase.
+productID);
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql> select * from procat where id>(select ID FROM procat INNER JOIN purchase ON procat.ID=purchase.
+productID);
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql> select ID FROM procat INNER JOIN purchase ON procat.ID=purchase.productID;
++------+
+| ID   |
++------+
+|    1 |
+|    1 |
+|    2 |
+|    3 |
+|    4 |
++------+
+5 rows in set (0.00 sec)
+
+mysql> select name,address from tata where salary>(select avg(salary) from tata);
++------+---------+
+| name | address |
++------+---------+
+| b    | lucknow |
+| d    | mumbai  |
++------+---------+
+2 rows in set (0.03 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| adventureworks     |
+| ashvit             |
+| book               |
+| emart              |
+| etour              |
+| etravel            |
+| exam               |
+| hotel_order        |
+| hotelbooking       |
+| loginpage          |
+| mart               |
+| meenal             |
+| mydb               |
+| mydb1              |
+| mypack             |
+| mysql              |
+| newdata            |
+| nn                 |
+| practical          |
+| pushkaraj_exam     |
+| rahul              |
+| rdb                |
+| sdb                |
+| shruti             |
+| sona               |
+| star               |
+| student_portal     |
+| swapdata           |
+| test               |
+| travaller          |
+| val                |
+| vehicleconfig      |
++--------------------+
+33 rows in set (0.02 sec)
+
+mysql> use information_schema;
+Database changed
+mysql> show tables;
++---------------------------------------+
+| Tables_in_information_schema          |
++---------------------------------------+
+| CHARACTER_SETS                        |
+| COLLATIONS                            |
+| COLLATION_CHARACTER_SET_APPLICABILITY |
+| COLUMNS                               |
+| COLUMN_PRIVILEGES                     |
+| ENGINES                               |
+| EVENTS                                |
+| FILES                                 |
+| GLOBAL_STATUS                         |
+| GLOBAL_VARIABLES                      |
+| KEY_COLUMN_USAGE                      |
+| PARTITIONS                            |
+| PLUGINS                               |
+| PROCESSLIST                           |
+| PROFILING                             |
+| REFERENTIAL_CONSTRAINTS               |
+| ROUTINES                              |
+| SCHEMATA                              |
+| SCHEMA_PRIVILEGES                     |
+| SESSION_STATUS                        |
+| SESSION_VARIABLES                     |
+| STATISTICS                            |
+| TABLES                                |
+| TABLE_CONSTRAINTS                     |
+| TABLE_PRIVILEGES                      |
+| TRIGGERS                              |
+| USER_PRIVILEGES                       |
+| VIEWS                                 |
++---------------------------------------+
+28 rows in set (0.00 sec)
+
+mysql> desc information_schema;
+ERROR 1109 (42S02): Unknown table 'information_schema' in information_schema
+mysql> select * from information_schema;
+ERROR 1109 (42S02): Unknown table 'information_schema' in information_schema
+mysql> desc adventureworks;
+ERROR 1109 (42S02): Unknown table 'adventureworks' in information_schema
+mysql> use adventureworks;
+Database changed
+mysql> desc adventureworks;
+ERROR 1146 (42S02): Table 'adventureworks.adventureworks' doesn't exist
+mysql> use information_schema;
+Database changed
+mysql> select * from information_schema.table_constraints where table_name='tata';
++--------------------+-------------------+-----------------+----------------+------------+------------
+-----+
+| CONSTRAINT_CATALOG | CONSTRAINT_SCHEMA | CONSTRAINT_NAME | TABLE_SCHEMA   | TABLE_NAME | CONSTRAINT_
+TYPE |
++--------------------+-------------------+-----------------+----------------+------------+------------
+-----+
+| NULL               | adventureworks    | PRIMARY         | adventureworks | tata       | PRIMARY KEY
+     |
++--------------------+-------------------+-----------------+----------------+------------+------------
+-----+
+1 row in set (0.17 sec)
+
+mysql> select * from information_schema.files where table_name='tata';
+Empty set (0.00 sec)
+
+mysql> select * from information_schema.columns where table_name='tata';
++---------------+----------------+------------+-------------+------------------+----------------+-----
+--------+-----------+--------------------------+------------------------+-------------------+---------
+------+--------------------+-------------------+--------------+------------+-------+------------------
+---------------+----------------+
+| TABLE_CATALOG | TABLE_SCHEMA   | TABLE_NAME | COLUMN_NAME | ORDINAL_POSITION | COLUMN_DEFAULT | IS_N
+ULLABLE | DATA_TYPE | CHARACTER_MAXIMUM_LENGTH | CHARACTER_OCTET_LENGTH | NUMERIC_PRECISION | NUMERIC_
+SCALE | CHARACTER_SET_NAME | COLLATION_NAME    | COLUMN_TYPE  | COLUMN_KEY | EXTRA | PRIVILEGES
+               | COLUMN_COMMENT |
++---------------+----------------+------------+-------------+------------------+----------------+-----
+--------+-----------+--------------------------+------------------------+-------------------+---------
+------+--------------------+-------------------+--------------+------------+-------+------------------
+---------------+----------------+
+| NULL          | adventureworks | tata       | id          |                1 | NULL           | NO
+        | int       |                     NULL |                   NULL |                10 |
+    0 | NULL               | NULL              | int(11)      | PRI        |       | select,insert,upd
+ate,references |                |
+| NULL          | adventureworks | tata       | name        |                2 | NULL           | NO
+        | varchar   |                       50 |                     50 |              NULL |
+ NULL | latin1             | latin1_swedish_ci | varchar(50)  |            |       | select,insert,upd
+ate,references |                |
+| NULL          | adventureworks | tata       | address     |                3 | NULL           | YES
+        | varchar   |                       50 |                     50 |              NULL |
+ NULL | latin1             | latin1_swedish_ci | varchar(50)  |            |       | select,insert,upd
+ate,references |                |
+| NULL          | adventureworks | tata       | salary      |                4 | NULL           | YES
+        | mediumint |                     NULL |                   NULL |                 7 |
+    0 | NULL               | NULL              | mediumint(9) |            |       | select,insert,upd
+ate,references |                |
+| NULL          | adventureworks | tata       | worktime    |                5 | NULL           | YES
+        | mediumint |                     NULL |                   NULL |                 7 |
+    0 | NULL               | NULL              | mediumint(9) |            |       | select,insert,upd
+ate,references |                |
++---------------+----------------+------------+-------------+------------------+----------------+-----
+--------+-----------+--------------------------+------------------------+-------------------+---------
+------+--------------------+-------------------+--------------+------------+-------+------------------
+---------------+----------------+
+5 rows in set (0.05 sec)
+
+mysql> use adventureworks;
+Database changed
+mysql> show tables;
++--------------------------+
+| Tables_in_adventureworks |
++--------------------------+
+| branch                   |
+| buyer                    |
+| datatypes                |
+| datedatatypes            |
+| numdatatypes             |
+| procat                   |
+| product                  |
+| purchase                 |
+| spldatatypes             |
+| tata                     |
+| textdatatypes            |
++--------------------------+
+11 rows in set (0.20 sec)
+
+mysql> desc tata;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| id       | int(11)      | NO   | PRI | NULL    |       |
+| name     | varchar(50)  | NO   |     | NULL    |       |
+| address  | varchar(50)  | YES  |     | NULL    |       |
+| salary   | mediumint(9) | YES  |     | NULL    |       |
+| worktime | mediumint(9) | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| adventureworks     |
+| ashvit             |
+| book               |
+| emart              |
+| etour              |
+| etravel            |
+| exam               |
+| hotel_order        |
+| hotelbooking       |
+| loginpage          |
+| mart               |
+| meenal             |
+| mydb               |
+| mydb1              |
+| mypack             |
+| mysql              |
+| newdata            |
+| nn                 |
+| practical          |
+| pushkaraj_exam     |
+| rahul              |
+| rdb                |
+| sdb                |
+| shruti             |
+| sona               |
+| star               |
+| student_portal     |
+| swapdata           |
+| test               |
+| travaller          |
+| val                |
+| vehicleconfig      |
++--------------------+
+33 rows in set (0.00 sec)
+
+mysql> use adventureworks;
+Database changed
+mysql> showtables;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'showtables' at line 1
+mysql> select * from tata;
++----+------+---------+--------+----------+
+| id | name | address | salary | worktime |
++----+------+---------+--------+----------+
+|  1 | a    | mumbai  |    500 |        5 |
+|  2 | b    | lucknow |   1000 |        9 |
+|  3 | c    | delhi   |    500 |        7 |
+|  4 | d    | mumbai  |   2000 |       10 |
+|  5 | e    | delhi   |    500 |       11 |
++----+------+---------+--------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from product;
++-----------+-------------+-------+
+| productID | productName | price |
++-----------+-------------+-------+
+|         1 | monitor     | 500.0 |
+|         2 | keyboard    | 600.3 |
+|         3 | mouse       | 100.8 |
+|         4 | motherboard | 990.9 |
++-----------+-------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from branch;
++----+-------+---------+
+| id | sales | address |
++----+-------+---------+
+|  1 |  5000 | lucknow |
+|  2 |   200 | delhi   |
+|  3 |  2000 | mumbai  |
+|  6 |  1500 | delhi   |
+|  7 |  NULL | lucknow |
++----+-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select concat(name,',',address)emp.details from tata;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near '.details from tata' at line 1
+mysql> select concat(name,',',address)empdetails from tata;
++------------+
+| empdetails |
++------------+
+| a,mumbai   |
+| b,lucknow  |
+| c,delhi    |
+| d,mumbai   |
+| e,delhi    |
++------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from tata where (select salary>500 from tata);
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql> select * from tata where salary>500;
++----+------+---------+--------+----------+
+| id | name | address | salary | worktime |
++----+------+---------+--------+----------+
+|  2 | b    | lucknow |   1000 |        9 |
+|  4 | d    | mumbai  |   2000 |       10 |
++----+------+---------+--------+----------+
+2 rows in set (0.00 sec)
+
+mysql> select * from procat;
++------+------+-------+
+| ID   | NAME | PRICE |
++------+------+-------+
+|    1 | ABC  |  4000 |
+|    2 | DEF  |  2300 |
+|    3 | GHI  |  6260 |
+|    4 | JKL  |  2500 |
+|    5 | MNO  |  2600 |
+|    6 | PQR  |  3000 |
++------+------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select * from purchase;
++-------+------------+-----------+---------+
+| purID | purDate    | productID | buyerID |
++-------+------------+-----------+---------+
+|     7 | 2019-08-27 |         1 |       2 |
+|     8 | 2019-08-12 |         1 |       1 |
+|     9 | 1998-04-06 |         2 |       4 |
+|    10 | 2019-08-12 |         3 |       2 |
+|    11 | 2005-10-06 |         4 |       4 |
++-------+------------+-----------+---------+
+5 rows in set (0.02 sec)
+
+mysql> select name,address from tata where salary=(select max(salary) from tata);
++------+---------+
+| name | address |
++------+---------+
+| d    | mumbai  |
++------+---------+
+1 row in set (0.00 sec)
+
+mysql> select * from procat where id>(select ID FROM procat INNER JOIN purchase ON procat.ID=purchase.
+productID);
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql> select name,address from tata where salary>(select avg(salary) from tata);
++------+---------+
+| name | address |
++------+---------+
+| b    | lucknow |
+| d    | mumbai  |
++------+---------+
+2 rows in set (0.00 sec)
+mysql> select * from tata;
++----+------+---------+--------+----------+
+| id | name | address | salary | worktime |
++----+------+---------+--------+----------+
+|  1 | a    | mumbai  |    500 |        5 |
+|  2 | b    | lucknow |   1000 |        9 |
+|  3 | c    | delhi   |    500 |        7 |
+|  4 | d    | mumbai  |   2000 |       10 |
+|  5 | e    | delhi   |    500 |       11 |
++----+------+---------+--------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from purchase;
++-------+------------+-----------+---------+
+| purID | purDate    | productID | buyerID |
++-------+------------+-----------+---------+
+|     7 | 2019-08-27 |         1 |       2 |
+|     8 | 2019-08-12 |         1 |       1 |
+|     9 | 1998-04-06 |         2 |       4 |
+|    10 | 2019-08-12 |         3 |       2 |
+|    11 | 2005-10-06 |         4 |       4 |
++-------+------------+-----------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select * from product;
++-----------+-------------+-------+
+| productID | productName | price |
++-----------+-------------+-------+
+|         1 | monitor     | 500.0 |
+|         2 | keyboard    | 600.3 |
+|         3 | mouse       | 100.8 |
+|         4 | motherboard | 990.9 |
++-----------+-------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from
+    -> (
+    -> select salary*worktime as totalsalary
+    -> from tata
+    -> )s;
++-------------+
+| totalsalary |
++-------------+
+|        2500 |
+|        9000 |
+|        3500 |
+|       20000 |
+|        5500 |
++-------------+
+5 rows in set (0.03 sec)
+
+mysql> select *,totalsalary from
+    -> (
+    -> select salary*worktime as totalsalary
+    -> from tata
+    -> )s;
++-------------+-------------+
+| totalsalary | totalsalary |
++-------------+-------------+
+|        2500 |        2500 |
+|        9000 |        9000 |
+|        3500 |        3500 |
+|       20000 |       20000 |
+|        5500 |        5500 |
++-------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from tata;
++----+------+---------+--------+----------+
+| id | name | address | salary | worktime |
++----+------+---------+--------+----------+
+|  1 | a    | mumbai  |    500 |        5 |
+|  2 | b    | lucknow |   1000 |        9 |
+|  3 | c    | delhi   |    500 |        7 |
+|  4 | d    | mumbai  |   2000 |       10 |
+|  5 | e    | delhi   |    500 |       11 |
++----+------+---------+--------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select id,name,address,salary,worktime
+    -> from
+    -> (
+    -> select salary*worktime as totalsalary
+    -> from tata
+    -> )s;
+ERROR 1054 (42S22): Unknown column 'id' in 'field list'
+mysql> select s.id,s.address
+    -> from
+    -> select salary*worktime as totalsalary
+    -> from tata
+    -> \c
+mysql> select s.id,s.address
+    -> from
+    -> (
+    -> select salary*worktime as totalsalary
+    -> from tata
+    -> )s;
+ERROR 1054 (42S22): Unknown column 's.id' in 'field list'
+mysql> select *
+    -> from
+    -> (
+    -> select salary*worktime as totalsalary
+    -> from tata)t;
++-------------+
+| totalsalary |
++-------------+
+|        2500 |
+|        9000 |
+|        3500 |
+|       20000 |
+|        5500 |
++-------------+
+5 rows in set (0.00 sec)
+
+mysql> select *
+    -> (
+    -> from
+    -> \c
+mysql> select *
+    -> from
+    -> (
+    -> select salary*worktime as totalsalary,id,address
+    -> from tata
+    -> )s;
++-------------+----+---------+
+| totalsalary | id | address |
++-------------+----+---------+
+|        2500 |  1 | mumbai  |
+|        9000 |  2 | lucknow |
+|        3500 |  3 | delhi   |
+|       20000 |  4 | mumbai  |
+|        5500 |  5 | delhi   |
++-------------+----+---------+
+5 rows in set (0.03 sec)
+
+mysql> select *
+    -> from
+    -> (
+    -> select*, salary*worktime as totalsalaryd
+    -> from tata
+    -> )s;
++----+------+---------+--------+----------+--------------+
+| id | name | address | salary | worktime | totalsalaryd |
++----+------+---------+--------+----------+--------------+
+|  1 | a    | mumbai  |    500 |        5 |         2500 |
+|  2 | b    | lucknow |   1000 |        9 |         9000 |
+|  3 | c    | delhi   |    500 |        7 |         3500 |
+|  4 | d    | mumbai  |   2000 |       10 |        20000 |
+|  5 | e    | delhi   |    500 |       11 |         5500 |
++----+------+---------+--------+----------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select *
+    -> from
+    -> (
+    -> select *, salary*worktime as totalsalary
+    -> from tata
+    -> )s;
++----+------+---------+--------+----------+-------------+
+| id | name | address | salary | worktime | totalsalary |
++----+------+---------+--------+----------+-------------+
+|  1 | a    | mumbai  |    500 |        5 |        2500 |
+|  2 | b    | lucknow |   1000 |        9 |        9000 |
+|  3 | c    | delhi   |    500 |        7 |        3500 |
+|  4 | d    | mumbai  |   2000 |       10 |       20000 |
+|  5 | e    | delhi   |    500 |       11 |        5500 |
++----+------+---------+--------+----------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from tata;
++----+------+---------+--------+----------+
+| id | name | address | salary | worktime |
++----+------+---------+--------+----------+
+|  1 | a    | mumbai  |    500 |        5 |
+|  2 | b    | lucknow |   1000 |        9 |
+|  3 | c    | delhi   |    500 |        7 |
+|  4 | d    | mumbai  |   2000 |       10 |
+|  5 | e    | delhi   |    500 |       11 |
++----+------+---------+--------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from branch;
++----+-------+---------+
+| id | sales | address |
++----+-------+---------+
+|  1 |  5000 | lucknow |
+|  2 |   200 | delhi   |
+|  3 |  2000 | mumbai  |
+|  6 |  1500 | delhi   |
+|  7 |  NULL | lucknow |
++----+-------+---------+
+5 rows in set (0.02 sec)
+
+mysql> select * from products;
+ERROR 1146 (42S02): Table 'adventureworks.products' doesn't exist
+mysql> select * from product;
++-----------+-------------+-------+
+| productID | productName | price |
++-----------+-------------+-------+
+|         1 | monitor     | 500.0 |
+|         2 | keyboard    | 600.3 |
+|         3 | mouse       | 100.8 |
+|         4 | motherboard | 990.9 |
++-----------+-------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from tata where salary IN(
+    -> select sales from branch where sales>200
+    -> );
++----+------+---------+--------+----------+
+| id | name | address | salary | worktime |
++----+------+---------+--------+----------+
+|  4 | d    | mumbai  |   2000 |       10 |
++----+------+---------+--------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from tata where salary IN(
+    -> select * from tata where salary IN(\c
+mysql> select * from tata where salary= IN(
+    -> select id from branch
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'IN(
+select id from branch
+)' at line 1
+mysql> select * from tata where salary IN
+    -> (
+    -> select id from branch
+    -> );
+Empty set (0.00 sec)
+
+mysql> select * from tata where salary= IN
+    -> (
+    -> select id from branch
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'IN
+(
+select id from branch
+)' at line 1
+mysql> select * from tata;
++----+------+---------+--------+----------+
+| id | name | address | salary | worktime |
++----+------+---------+--------+----------+
+|  1 | a    | mumbai  |    500 |        5 |
+|  2 | b    | lucknow |   1000 |        9 |
+|  3 | c    | delhi   |    500 |        7 |
+|  4 | d    | mumbai  |   2000 |       10 |
+|  5 | e    | delhi   |    500 |       11 |
++----+------+---------+--------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from tata where address
+    -> (
+    -> \c
+mysql> select * from tata where address IN
+    -> (
+    -> select address from tata where \c
+mysql> select * from tata where address=ALL
+    -> (
+    -> select address from tata where \c
+mysql> select * from tata where address=ANY
+    -> (
+    -> select address from tata where
+    -> address='mumbai'
+    -> OR worktime>7
+    -> );
++----+------+---------+--------+----------+
+| id | name | address | salary | worktime |
++----+------+---------+--------+----------+
+|  1 | a    | mumbai  |    500 |        5 |
+|  2 | b    | lucknow |   1000 |        9 |
+|  3 | c    | delhi   |    500 |        7 |
+|  4 | d    | mumbai  |   2000 |       10 |
+|  5 | e    | delhi   |    500 |       11 |
++----+------+---------+--------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select address from tata where
+    -> select * from tata where address IN\c
+mysql>
+mysql> select * from tata where address=any
+    -> (
+    -> select address from tata where
+    -> address='mumbai'
+    -> OR worktime<7
+    -> );
++----+------+---------+--------+----------+
+| id | name | address | salary | worktime |
++----+------+---------+--------+----------+
+|  1 | a    | mumbai  |    500 |        5 |
+|  4 | d    | mumbai  |   2000 |       10 |
++----+------+---------+--------+----------+
+2 rows in set (0.00 sec)
+
+mysql>mysql> SELECT * FROM TATA;
++----+------+---------+--------+----------+
+| id | name | address | salary | worktime |
++----+------+---------+--------+----------+
+|  1 | a    | mumbai  |    500 |        5 |
+|  2 | b    | lucknow |   1000 |        9 |
+|  3 | c    | delhi   |    500 |        7 |
+|  4 | d    | mumbai  |   2000 |       10 |
+|  5 | e    | delhi   |    500 |       11 |
++----+------+---------+--------+----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM BRANCH;
++----+-------+---------+
+| id | sales | address |
++----+-------+---------+
+|  1 |  5000 | lucknow |
+|  2 |   200 | delhi   |
+|  3 |  2000 | mumbai  |
+|  6 |  1500 | delhi   |
+|  7 |  NULL | lucknow |
++----+-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> SHOW TABLES;
++--------------------------+
+| Tables_in_adventureworks |
++--------------------------+
+| branch                   |
+| buyer                    |
+| datatypes                |
+| datedatatypes            |
+| numdatatypes             |
+| procat                   |
+| product                  |
+| purchase                 |
+| spldatatypes             |
+| tata                     |
+| textdatatypes            |
++--------------------------+
+11 rows in set (0.39 sec)
+
+mysql> SELECT * FROM BUYER;
++---------+-------+------------+---------+
+| buyerID | Bname | Bphone     | btype   |
++---------+-------+------------+---------+
+|       1 | abc   | 1234567890 | RegCust |
+|       2 | def   | 123456789  | NotReg  |
+|       3 | ghi   | 2345678901 | RegCust |
+|       4 | jkl   | 7890123456 | NotReg  |
++---------+-------+------------+---------+
+4 rows in set (0.08 sec)
+
+mysql> SELECT * FROM procat;
++------+------+-------+
+| ID   | NAME | PRICE |
++------+------+-------+
+|    1 | ABC  |  4000 |
+|    2 | DEF  |  2300 |
+|    3 | GHI  |  6260 |
+|    4 | JKL  |  2500 |
+|    5 | MNO  |  2600 |
+|    6 | PQR  |  3000 |
++------+------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select name,address from tata
+    -> union
+    -> select \c
+mysql> select name,salary from tata
+    -> union
+    -> select name,price from procat;
++------+--------+
+| name | salary |
++------+--------+
+| a    |    500 |
+| b    |   1000 |
+| c    |    500 |
+| d    |   2000 |
+| e    |    500 |
+| ABC  |   4000 |
+| DEF  |   2300 |
+| GHI  |   6260 |
+| JKL  |   2500 |
+| MNO  |   2600 |
+| PQR  |   3000 |
++------+--------+
+11 rows in set (0.02 sec)
+
+mysql> select id from tata
+    -> intersect
+    -> select id from branch;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'select id from branch' at line 3
+mysql> select ID from tata
+    -> intersect
+    -> select ID from branch;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'select ID from branch' at line 3
+mysql>
+mysql>
+mysql> select * from product;
++-----------+-------------+-------+
+| productID | productName | price |
++-----------+-------------+-------+
+|         1 | monitor     | 500.0 |
+|         2 | keyboard    | 600.3 |
+|         3 | mouse       | 100.8 |
+|         4 | motherboard | 990.9 |
++-----------+-------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select buyerID from buyer
+    -> INTERSECT
+    -> selesct productID from product;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'selesct productID from product' at line 3
+mysql> select buyerID from buyer
+    -> INTERSECT
+    -> select productID from product;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'select productID from product' at line 3
+mysql> select * from buyer;
++---------+-------+------------+---------+
+| buyerID | Bname | Bphone     | btype   |
++---------+-------+------------+---------+
+|       1 | abc   | 1234567890 | RegCust |
+|       2 | def   | 123456789  | NotReg  |
+|       3 | ghi   | 2345678901 | RegCust |
+|       4 | jkl   | 7890123456 | NotReg  |
++---------+-------+------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select * from datatypes;
+Empty set (0.03 sec)
+
+mysql> desc datatpes;
+ERROR 1146 (42S02): Table 'adventureworks.datatpes' doesn't exist
+mysql> desc datatypes;
++-------+-----------+------+-----+-------------------+-----------------------------+
+| Field | Type      | Null | Key | Default           | Extra                       |
++-------+-----------+------+-----+-------------------+-----------------------------+
+| A     | date      | YES  |     | NULL              |                             |
+| B     | datetime  | YES  |     | NULL              |                             |
+| C     | timestamp | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
+| D     | time      | YES  |     | NULL              |                             |
++-------+-----------+------+-----+-------------------+-----------------------------+
+4 rows in set (0.00 sec)
+
+mysql> create table seller
+    -> (
+    -> sellID int,
+    -> Sname,
+    -> \c
+mysql> create table seller
+    -> (
+    -> sellID int,
+    -> Sname varchar(10),
+    -> Sphone Varchar(10),
+    -> Stype varchar(10)
+    -> );
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> desc seller;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| sellID | int(11)     | YES  |     | NULL    |       |
+| Sname  | varchar(10) | YES  |     | NULL    |       |
+| Sphone | varchar(10) | YES  |     | NULL    |       |
+| Stype  | varchar(10) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into seller values
+    -> (1,'mno','1234567890','Reg'),
+    -> (2,'pqr','0123456789','NotReg'),
+    -> (3,'stu','2345678901','Reg'),
+    -> (4,'vwx','4567890123','Reg');
+Query OK, 4 rows affected (0.03 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from seller;
++--------+-------+------------+--------+
+| sellID | Sname | Sphone     | Stype  |
++--------+-------+------------+--------+
+|      1 | mno   | 1234567890 | Reg    |
+|      2 | pqr   | 0123456789 | NotReg |
+|      3 | stu   | 2345678901 | Reg    |
+|      4 | vwx   | 4567890123 | Reg    |
++--------+-------+------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from buyer;
++---------+-------+------------+---------+
+| buyerID | Bname | Bphone     | btype   |
++---------+-------+------------+---------+
+|       1 | abc   | 1234567890 | RegCust |
+|       2 | def   | 123456789  | NotReg  |
+|       3 | ghi   | 2345678901 | RegCust |
+|       4 | jkl   | 7890123456 | NotReg  |
++---------+-------+------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select * from seller
+    -> intersect
+    -> select * from buyer;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'select * from buyer' at line 3
+mysql> select sellID,Sphone from seller
+    -> intersect
+    -> select buyerID,Bphone from buyer;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'select buyerID,Bphone from buyer' at line 3
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql> select Sphone from seller
+    -> INTRESECT
+    -> select Bphone from buyer;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'select Bphone from buyer' at line 3
+mysql> select sellID from seller
+    -> intresect
+    -> select buyerID from buyer;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'select buyerID from buyer' at line 3
+mysql> CREATE UNIQUE INDEX Sname ON seller;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near '' at line 1
+mysql> CREATE UNIQUE INDEX Sellers ON seller(Sname);
+Query OK, 4 rows affected (0.23 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> SHOW INDEX FROM seller;
++--------+------------+----------+--------------+-------------+-----------+-------------+----------+--
+------+------+------------+---------+
+| Table  | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | P
+acked | Null | Index_type | Comment |
++--------+------------+----------+--------------+-------------+-----------+-------------+----------+--
+------+------+------------+---------+
+| seller |          0 | Sellers  |            1 | Sname       | A         |           2 |     NULL | N
+ULL   | YES  | BTREE      |         |
++--------+------------+----------+--------------+-------------+-----------+-------------+----------+--
+------+------+------------+---------+
+1 row in set (0.02 sec)

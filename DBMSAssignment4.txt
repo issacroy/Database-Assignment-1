@@ -1,0 +1,484 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.1.38-community MySQL Community Server (GPL)
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| adventureworks     |
+| ashvit             |
+| book               |
+| emart              |
+| etour              |
+| etravel            |
+| exam               |
+| hotel_order        |
+| hotelbooking       |
+| loginpage          |
+| mart               |
+| meenal             |
+| mydb               |
+| mydb1              |
+| mypack             |
+| mysql              |
+| newdata            |
+| nn                 |
+| practical          |
+| pushkaraj_exam     |
+| rahul              |
+| rdb                |
+| sdb                |
+| shruti             |
+| sona               |
+| star               |
+| student_portal     |
+| swapdata           |
+| test               |
+| travaller          |
+| val                |
+| vehicleconfig      |
++--------------------+
+33 rows in set (0.03 sec)
+
+mysql> use adventureworks;
+Database changed
+mysql> show tables;
++--------------------------+
+| Tables_in_adventureworks |
++--------------------------+
+| buyer                    |
+| datatypes                |
+| datedatatypes            |
+| numdatatypes             |
+| procat                   |
+| product                  |
+| purchase                 |
+| spldatatypes             |
+| tata                     |
+| textdatatypes            |
++--------------------------+
+10 rows in set (0.20 sec)
+
+mysql> select * from tables;
+ERROR 1146 (42S02): Table 'adventureworks.tables' doesn't exist
+mysql> select * from tata;
++----+------+---------+--------+
+| id | name | address | salary |
++----+------+---------+--------+
+|  1 | a    | mumbai  |    500 |
+|  2 | b    | lucknow |   1000 |
+|  3 | c    | delhi   |    500 |
+|  4 | d    | mumbai  |   2000 |
+|  5 | e    | delhi   |    500 |
++----+------+---------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select address,count (*)
+    -> from tata
+    -> group by address;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near '*)
+from tata
+group by address' at line 1
+mysql> select address,count(*)
+    -> from tata
+    -> group by address;
++---------+----------+
+| address | count(*) |
++---------+----------+
+| delhi   |        2 |
+| lucknow |        1 |
+| mumbai  |        2 |
++---------+----------+
+3 rows in set (0.00 sec)
+
+mysql> alter table tata
+    -> add column worktime mediumint after salary;
+Query OK, 5 rows affected (0.16 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> update tata set worktime=5 where id=1;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update tata set worktime=9 where id=2;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update tata set worktime=7 where id=3;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update tata set worktime=10 where id=4;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update tata set worktime=11 where id=5;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from tata;
++----+------+---------+--------+----------+
+| id | name | address | salary | worktime |
++----+------+---------+--------+----------+
+|  1 | a    | mumbai  |    500 |        5 |
+|  2 | b    | lucknow |   1000 |        9 |
+|  3 | c    | delhi   |    500 |        7 |
+|  4 | d    | mumbai  |   2000 |       10 |
+|  5 | e    | delhi   |    500 |       11 |
++----+------+---------+--------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select name,min(salary) as "mini. salary"
+    -> from tata
+    -> group by salary;
++------+--------------+
+| name | mini. salary |
++------+--------------+
+| a    |          500 |
+| b    |         1000 |
+| d    |         2000 |
++------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> select name,min(salary) as "mini. salary"
+    -> from tata;
++------+--------------+
+| name | mini. salary |
++------+--------------+
+| a    |          500 |
++------+--------------+
+1 row in set (0.00 sec)
+
+mysql> select name,max(salary) as "mini.salary" from tata;
++------+-------------+
+| name | mini.salary |
++------+-------------+
+| a    |        2000 |
++------+-------------+
+1 row in set (0.00 sec)
+
+mysql> create table sales
+    -> (
+    -> id int AUTO_INCREMENT primar key,
+    ->
+    ->
+    -> create table Branch
+    -> (
+    -> id int AUTO_INCREMENT primary key,
+    -> sales mediumint,
+    -> address varchar(50),
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'primar key,
+
+
+create table Branch
+(
+id int AUTO_INCREMENT primary key,
+sales med' at line 3
+mysql> create table Branch
+    -> (
+    -> id int AUTO_INCREMENT primary key,
+    -> sales mediumint,
+    -> address varchar(50),
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near ')' at line 6
+mysql> create table Branch
+    -> (
+    -> id int AUTO_INCREMENT primary key,
+    -> sales mediumint,
+    -> address varchar(50)
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> desc branch;
++---------+--------------+------+-----+---------+----------------+
+| Field   | Type         | Null | Key | Default | Extra          |
++---------+--------------+------+-----+---------+----------------+
+| id      | int(11)      | NO   | PRI | NULL    | auto_increment |
+| sales   | mediumint(9) | YES  |     | NULL    |                |
+| address | varchar(50)  | YES  |     | NULL    |                |
++---------+--------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> insert into branch values
+    -> (5000,lucknow),
+    -> (200,delhi),
+    -> (2000,mumbai),
+    -> (1500,delhi),
+    -> (NULL,lucknow)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near ')' at line 7
+mysql> insert into branch values
+    -> (
+    -> (5000,lucknow),
+    -> (200,delhi),
+    -> (2000,mumbai),
+    -> (1500,delhi),
+    -> (NULL,lucknow)
+    -> );
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into branch(sales,address) values(5000,lucknow);
+ERROR 1054 (42S22): Unknown column 'lucknow' in 'field list'
+mysql> insert into branch(sales,address) values(5000,'lucknow');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into branch(sales,address) values(200,'delhi'),(2000,'');
+Query OK, 2 rows affected (0.03 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> update branch set address='mumbai'where sales=2000;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> insert into branch(sales,address) values(1500,'delhi'),('NULL','lucknow');
+ERROR 1366 (HY000): Incorrect integer value: 'NULL' for column 'sales' at row 2
+mysql> insert into branch(sales,address) values(1500,'delhi'),(NULL,'lucknow');
+Query OK, 2 rows affected (0.03 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from branch;
++----+-------+---------+
+| id | sales | address |
++----+-------+---------+
+|  1 |  5000 | lucknow |
+|  2 |   200 | delhi   |
+|  3 |  2000 | mumbai  |
+|  6 |  1500 | delhi   |
+|  7 |  NULL | lucknow |
++----+-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select * from tata;
++----+------+---------+--------+----------+
+| id | name | address | salary | worktime |
++----+------+---------+--------+----------+
+|  1 | a    | mumbai  |    500 |        5 |
+|  2 | b    | lucknow |   1000 |        9 |
+|  3 | c    | delhi   |    500 |        7 |
+|  4 | d    | mumbai  |   2000 |       10 |
+|  5 | e    | delhi   |    500 |       11 |
++----+------+---------+--------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select branchid,
+    -> branchsales.branchaddress,
+    -> tataname,tataaddress,tatasalary,tataworktime
+    -> FROM tata
+    -> INNER JOIN branch ON tata.id=branch.id;
+ERROR 1054 (42S22): Unknown column 'branchid' in 'field list'
+mysql> select branch.id,
+    -> branch.sales.branch.address,
+    -> tata.name,tata.address,tata.salary,tata.worktime
+    -> FROM tata
+    -> INNER JOIN branch ON tata.id=branch.id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near '.address,
+tata.name,tata.address,tata.salary,tata.worktime
+FROM tata
+INNER JOIN ' at line 2
+mysql> select branchid,
+    -> branchsales.branchaddress,
+    -> tataname,tataaddress,tatasalary,tataworktime
+    -> ;
+ERROR 1054 (42S22): Unknown column 'branchid' in 'field list'
+mysql> INNER JOIN branch ON tata.id=branch.id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your My
+SQL server version for the right syntax to use near 'INNER JOIN branch ON tata.id=branch.id' at line 1
+
+mysql>
+mysql>  select branch.id,
+    ->  branch.sales,branch.address,
+    ->  tata.name,tata.address,tata.salary,tata.worktime
+    ->  FROM tata
+    ->  INNER JOIN branch ON tata.id=branch.id;
++----+-------+---------+------+---------+--------+----------+
+| id | sales | address | name | address | salary | worktime |
++----+-------+---------+------+---------+--------+----------+
+|  1 |  5000 | lucknow | a    | mumbai  |    500 |        5 |
+|  2 |   200 | delhi   | b    | lucknow |   1000 |        9 |
+|  3 |  2000 | mumbai  | c    | delhi   |    500 |        7 |
++----+-------+---------+------+---------+--------+----------+
+3 rows in set (0.02 sec)
+mysql>  select branch.id,
+    -> branch.sales,brmysql>  select branch.id,
+    -> branch.sales,branch.address,
+    ->  tata.name,tata.address,tata.salary,tata.worktime
+    -> FROM tata
+    -> INNER JOIN branch ON tata.salary=branch.salary;
+ERROR 1054 (42S22): Unknown column 'branch.salary' in 'on clause'
+mysql>
+mysql>
+mysql> select * from tata;
++----+------+---------+--------+----------+
+| id | name | address | salary | worktime |
++----+------+---------+--------+----------+
+|  1 | a    | mumbai  |    500 |        5 |
+|  2 | b    | lucknow |   1000 |        9 |
+|  3 | c    | delhi   |    500 |        7 |
+|  4 | d    | mumbai  |   2000 |       10 |
+|  5 | e    | delhi   |    500 |       11 |
++----+------+---------+--------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from branch;
++----+-------+---------+
+| id | sales | address |
++----+-------+---------+
+|  1 |  5000 | lucknow |
+|  2 |   200 | delhi   |
+|  3 |  2000 | mumbai  |
+|  6 |  1500 | delhi   |
+|  7 |  NULL | lucknow |
++----+-------+---------+
+5 rows in set (0.00 sec)
+
+mysql>  select branch.id,
+    ->  branch.sales,branch.address,
+    -> tata.name,tata.address,tata.salary,tata.worktime
+    -> FROM tata
+    ->  INNER JOIN branch ON tata.address=branch.address;
++----+-------+---------+------+---------+--------+----------+
+| id | sales | address | name | address | salary | worktime |
++----+-------+---------+------+---------+--------+----------+
+|  1 |  5000 | lucknow | b    | lucknow |   1000 |        9 |
+|  2 |   200 | delhi   | c    | delhi   |    500 |        7 |
+|  2 |   200 | delhi   | e    | delhi   |    500 |       11 |
+|  3 |  2000 | mumbai  | a    | mumbai  |    500 |        5 |
+|  3 |  2000 | mumbai  | d    | mumbai  |   2000 |       10 |
+|  6 |  1500 | delhi   | c    | delhi   |    500 |        7 |
+|  6 |  1500 | delhi   | e    | delhi   |    500 |       11 |
+|  7 |  NULL | lucknow | b    | lucknow |   1000 |        9 |
++----+-------+---------+------+---------+--------+----------+
+8 rows in set (0.00 sec)
+
+mysql> select * from tata;
++----+------+---------+--------+----------+
+| id | name | address | salary | worktime |
++----+------+---------+--------+----------+
+|  1 | a    | mumbai  |    500 |        5 |
+|  2 | b    | lucknow |   1000 |        9 |
+|  3 | c    | delhi   |    500 |        7 |
+|  4 | d    | mumbai  |   2000 |       10 |
+|  5 | e    | delhi   |    500 |       11 |
++----+------+---------+--------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from branch;
++----+-------+---------+
+| id | sales | address |
++----+-------+---------+
+|  1 |  5000 | lucknow |
+|  2 |   200 | delhi   |
+|  3 |  2000 | mumbai  |
+|  6 |  1500 | delhi   |
+|  7 |  NULL | lucknow |
++----+-------+---------+
+5 rows in set (0.00 sec)
+
+mysql>  select tata.id,
+    -> tata.name,tata.address,tata.salary,tata.worktime,
+    ->  branch.sales,branch.address
+    -> FROM tata
+    ->  INNER JOIN branch ON tata.address=branch.address;
++----+------+---------+--------+----------+-------+---------+
+| id | name | address | salary | worktime | sales | address |
++----+------+---------+--------+----------+-------+---------+
+|  2 | b    | lucknow |   1000 |        9 |  5000 | lucknow |
+|  3 | c    | delhi   |    500 |        7 |   200 | delhi   |
+|  5 | e    | delhi   |    500 |       11 |   200 | delhi   |
+|  1 | a    | mumbai  |    500 |        5 |  2000 | mumbai  |
+|  4 | d    | mumbai  |   2000 |       10 |  2000 | mumbai  |
+|  3 | c    | delhi   |    500 |        7 |  1500 | delhi   |
+|  5 | e    | delhi   |    500 |       11 |  1500 | delhi   |
+|  2 | b    | lucknow |   1000 |        9 |  NULL | lucknow |
++----+------+---------+--------+----------+-------+---------+
+8 rows in set (0.00 sec)
+
+mysql> select * from branch;
++----+-------+---------+
+| id | sales | address |
++----+-------+---------+
+|  1 |  5000 | lucknow |
+|  2 |   200 | delhi   |
+|  3 |  2000 | mumbai  |
+|  6 |  1500 | delhi   |
+|  7 |  NULL | lucknow |
++----+-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select * from tata;
++----+------+---------+--------+----------+
+| id | name | address | salary | worktime |
++----+------+---------+--------+----------+
+|  1 | a    | mumbai  |    500 |        5 |
+|  2 | b    | lucknow |   1000 |        9 |
+|  3 | c    | delhi   |    500 |        7 |
+|  4 | d    | mumbai  |   2000 |       10 |
+|  5 | e    | delhi   |    500 |       11 |
++----+------+---------+--------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select branch.id,branch.sales,branch.address,
+    -> tata.name,tata.salary,tata.worktime
+    -> from branch
+    -> LEFT JOIN tata
+    -> ON branch.id=tata.id;
++----+-------+---------+------+--------+----------+
+| id | sales | address | name | salary | worktime |
++----+-------+---------+------+--------+----------+
+|  1 |  5000 | lucknow | a    |    500 |        5 |
+|  2 |   200 | delhi   | b    |   1000 |        9 |
+|  3 |  2000 | mumbai  | c    |    500 |        7 |
+|  6 |  1500 | delhi   | NULL |   NULL |     NULL |
+|  7 |  NULL | lucknow | NULL |   NULL |     NULL |
++----+-------+---------+------+--------+----------+
+5 rows in set (0.02 sec)
+
+mysql> select * from branch;
++----+-------+---------+
+| id | sales | address |
++----+-------+---------+
+|  1 |  5000 | lucknow |
+|  2 |   200 | delhi   |
+|  3 |  2000 | mumbai  |
+|  6 |  1500 | delhi   |
+|  7 |  NULL | lucknow |
++----+-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select * from tata;
++----+------+---------+--------+----------+
+| id | name | address | salary | worktime |
++----+------+---------+--------+----------+
+|  1 | a    | mumbai  |    500 |        5 |
+|  2 | b    | lucknow |   1000 |        9 |
+|  3 | c    | delhi   |    500 |        7 |
+|  4 | d    | mumbai  |   2000 |       10 |
+|  5 | e    | delhi   |    500 |       11 |
++----+------+---------+--------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select branch.id,branch.sales,branch.address,
+    -> tata.name,tata.salary,tata.worktime
+    -> from branch
+    -> RIGHT JOIN tata
+    -> ON branch.id=tata.id;
++------+-------+---------+------+--------+----------+
+| id   | sales | address | name | salary | worktime |
++------+-------+---------+------+--------+----------+
+|    1 |  5000 | lucknow | a    |    500 |        5 |
+|    2 |   200 | delhi   | b    |   1000 |        9 |
+|    3 |  2000 | mumbai  | c    |    500 |        7 |
+| NULL |  NULL | NULL    | d    |   2000 |       10 |
+| NULL |  NULL | NULL    | e    |    500 |       11 |
++------+-------+---------+------+--------+----------+
+5 rows in set (0.00 sec)
